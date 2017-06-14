@@ -8,26 +8,36 @@
         android:id="@+id/magnitude"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="7.8"
         android:layout_weight="1"
-        />
+        android:text="7.8" />
 
     <TextView
         android:id="@+id/location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="San Francisco"
         android:layout_weight="1"
-        />
+        android:text="San Francisco" />
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feb 23, 1993"
-        android:layout_weight="1"
+        android:orientation="vertical">
 
-        />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feb 23, 1993"
+
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:23" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
