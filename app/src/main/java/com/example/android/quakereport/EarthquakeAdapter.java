@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * Created by Larry Osakwe on 6/13/2017.
  */
 
-public class QuakeAdapter extends ArrayAdapter<Quake> {
-    public QuakeAdapter(Context context, ArrayList<Quake> quakes) {
-        super(context, 0);
+public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
+    public EarthquakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
+        super(context, 0, earthquakes);
     }
 
     @Override
@@ -25,16 +25,16 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-        Quake currentQuake = getItem(position);
+        Earthquake currentEarthquake = getItem(position);
 
         TextView magnitude = (TextView) listItemView.findViewById(R.id.magnitude);
-        magnitude.setText((currentQuake.getMagnitude()));
+        magnitude.setText(currentEarthquake.getMagnitude() + "");
 
         TextView location = (TextView) listItemView.findViewById(R.id.location);
-        location.setText((currentQuake.getLocation()));
+        location.setText(currentEarthquake.getLocation());
 
         TextView date = (TextView) listItemView.findViewById(R.id.date);
-        date.setText((currentQuake.getDate()));
+        date.setText(currentEarthquake.getDate() + "");
 
 
         return listItemView;

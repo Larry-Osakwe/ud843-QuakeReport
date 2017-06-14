@@ -4,19 +4,19 @@ package com.example.android.quakereport;
  * Created by Larry Osakwe on 6/13/2017.
  */
 
-public class Quake {
-    private String magnitude;
+public class Earthquake {
+    private int magnitude;
     private String location;
-    private String date;
+    private int date;
 
 
-    public Quake(String magnitude, String location, String date) {
+    public Earthquake(int magnitude, String location, int date) {
         this.magnitude = magnitude;
         this.location = location;
         this.date = date;
     }
 
-    public String getMagnitude() {
+    public int getMagnitude() {
         return magnitude;
     }
 
@@ -24,7 +24,7 @@ public class Quake {
         return location;
     }
 
-    public String getDate() {
+    public int getDate() {
         return date;
     }
 }
