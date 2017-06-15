@@ -11,7 +11,7 @@ public class Earthquake {
     private String url;
 
 
-    public Earthquake(double magnitude, String location, long date, String URL) {
+    public Earthquake(double magnitude, String location, long date, String url) {
         this.magnitude = magnitude;
         this.location = location;
         this.date = date;
