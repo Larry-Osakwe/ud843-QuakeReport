@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import java.text.DecimalFormat;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Larry Osakwe on 6/13/2017.
@@ -22,7 +22,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     private Earthquake currentEarthquake;
 
-    public EarthquakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
+    public EarthquakeAdapter(Context context, List<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
     }
 
@@ -77,7 +77,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     public String dateFormat() {
         long timeInMilliseconds = currentEarthquake.getDate();
         Date dateObject = new Date(timeInMilliseconds);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy");
 
         return dateFormatter.format(dateObject);
     }
