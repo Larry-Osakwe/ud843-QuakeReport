@@ -40,11 +40,15 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
      */
     private static final int EARTHQUAKE_LOADER_ID = 1;
 
-    /** Sample JSON response for a USGS query */
+    /**
+     * Sample JSON response for a USGS query
+     */
     private static final String SAMPLE_JSON_RESPONSE =
             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=5&limit=50";
 
-    /** Adapter for the list of earthquakes */
+    /**
+     * Adapter for the list of earthquakes
+     */
     private EarthquakeAdapter mAdapter;
 
     @Override
