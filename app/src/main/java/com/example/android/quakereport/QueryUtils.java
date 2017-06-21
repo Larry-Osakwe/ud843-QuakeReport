@@ -4,6 +4,7 @@ package com.example.android.quakereport;
  * Created by Larry Osakwe on 6/13/2017.
  */
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -40,13 +41,17 @@ public final class QueryUtils {
      * Return a list of {@link Earthquake} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<Earthquake> extractEarthquakes(String requestUrl) {
+    public static ArrayList<Earthquake> extractEarthquakes(String earthquakeJSON) {
+// If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(earthquakeJSON)) {
+            return null;
+        }
 
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
 
         // Create URL object
-        URL url = createUrl(requestUrl);
+        URL url = createUrl(earthquakeJSON);
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
