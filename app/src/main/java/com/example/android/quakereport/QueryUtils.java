@@ -42,6 +42,7 @@ public final class QueryUtils {
      * parsing a JSON response.
      */
     public static ArrayList<Earthquake> extractEarthquakes(String earthquakeJSON) {
+
 // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(earthquakeJSON)) {
             return null;

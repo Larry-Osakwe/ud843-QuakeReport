@@ -20,12 +20,15 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,6 +57,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     /** TextView that is displayed when the list is empty */
     private TextView mEmptyStateTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +100,26 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         });
 
 
-        // Get a reference to the LoaderManager, in order to interact with loaders.
-        LoaderManager loaderManager = getLoaderManager();
+        if (isNetworkOnline()) {
+            // Get a reference to the LoaderManager, in order to interact with loaders.
+            LoaderManager loaderManager = getLoaderManager();
 
-        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-        // because this activity implements the LoaderCallbacks interface).
-        loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+            // because this activity implements the LoaderCallbacks interface).
+            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        } else {
+            mEmptyStateTextView.setText("No internet connection.");
+            View loadSpinner = findViewById(R.id.loading_spinner);
+            loadSpinner.setVisibility(View.GONE);
+        }
+
+
+
+
+
+
+
     }
 
     @Override
@@ -124,6 +141,10 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         if (earthquakes != null && !earthquakes.isEmpty()) {
             mAdapter.addAll(earthquakes);
         }
+
+        ProgressBar loadSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        loadSpinner.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -156,5 +177,25 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             List<Earthquake> earthquakes = QueryUtils.extractEarthquakes(SAMPLE_JSON_RESPONSE);
             return earthquakes;
         }
+    }
+
+    public boolean isNetworkOnline() {
+        boolean status=false;
+        try{
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.getState()==NetworkInfo.State.CONNECTED) {
+                status= true;
+            }else {
+                netInfo = cm.getActiveNetworkInfo();
+                if(netInfo!=null && netInfo.getState()==NetworkInfo.State.CONNECTED)
+                    status= true;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return status;
+
     }
 }
